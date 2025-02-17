@@ -1,6 +1,7 @@
 format = """
 $jobs\
 $directory\
+$git_branch\
 $character\
 """
 
@@ -15,6 +16,9 @@ number_threshold = 1
 truncation_length = 2
 truncation_symbol = '.../'
 format = '[$path](bold white)'
+
+[git_branch]
+format = ' on [$symbol$branch(:$remote_branch)](bold white)'
 
 [character]
 success_symbol = '[>](bold white)'
