@@ -1,0 +1,22 @@
+format = """
+$jobs\
+$directory\
+$character\
+"""
+
+add_newline=false
+
+[jobs]
+format = '[\[$number\]](bold white) '
+symbol_threshold = 1
+number_threshold = 1
+
+[directory]
+truncation_length = 2
+truncation_symbol = '.../'
+format = '[$path](bold white)'
+
+[character]
+success_symbol = '[>](bold white)'
+error_symbol = '[>](bold white)'
+
