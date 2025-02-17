@@ -21,14 +21,14 @@ vim.api.nvim_create_user_command('Pomo', function()
     local date = os.date('%F')
     vim.api.nvim_put({ date }, 'c', true, true)
     local pomo_template = 
-        vim.fn.readfile(vim.fn.expand('./write/pomo.txt'))
+        vim.fn.readfile(vim.fn.expand('~/.config/nvim/write/pomo.txt'))
     vim.api.nvim_put(pomo_template, 'l', true, true)
 end, {})
 
 -- Writes Journal Template from ~/.journal_template.txt
 vim.api.nvim_create_user_command('Journal', function()
     local journal_template = 
-        vim.fn.readfile(vim.fn.expand('./write/journal.txt'))
+        vim.fn.readfile(vim.fn.expand('~/.config/nvim/write/journal.txt'))
     vim.api.nvim_put(journal_template, 'l', true, true)
 end, {})
 
