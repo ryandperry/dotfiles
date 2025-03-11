@@ -47,6 +47,8 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'blazkowolf/gruber-darker.nvim'
 Plug 'vimwiki/vimwiki'
+Plug 'justinmk/vim-dirvish'
+Plug 'roginfarrer/vim-dirvish-dovish'
 
 vim.call('plug#end')
 
@@ -59,11 +61,21 @@ require('nvim-autopairs').setup {}
 -- Set up LSP
 local lspconfig = require('lspconfig')
 
--- Configuration for clangd
+-- Configuration for clangd (C/C++ LSP)
 lspconfig.clangd.setup{}
+
+-- Configuration for hls (Haskell LSP)
+lspconfig.hls.setup{}
+
+-- Configuration for csharp-ls (C# LSP)
+-- lspconfig.csharp_ls.setup{}
 
 -- Configuration for nvim-telescope
 local builtin = require('telescope.builtin')
+
+-- ===== mappings =====
+
+-- Mappings for nvim-telescope
 vim.keymap.set('n', '<leader>ff', builtin.find_files, 
                     { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, 
@@ -72,6 +84,17 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers,
                     { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, 
                     { desc = 'Telescope help tags' })
+
+-- Move between panes
+vim.keymap.set('n', '<up>', '<C-w><up>')
+vim.keymap.set('n', '<down>', '<C-w><down>')
+vim.keymap.set('n', '<left>', '<C-w><left>')
+vim.keymap.set('n', '<right>', '<C-w><right>')
+
+-- Escape from terminal mode
+vim.api.nvim_set_keymap('t', '<ESC>', [[<C-\><C-n>]], { noremap = true })
+
+-- ===== vimscript =====
 
 vim.cmd [[
     highlight CursorLine cterm=NONE ctermbg=NONE ctermfg=NONE
