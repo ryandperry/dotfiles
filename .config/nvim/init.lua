@@ -12,20 +12,26 @@ vim.o.shiftwidth=4 -- Size of an indent
 
 -- Writes today's date
 vim.api.nvim_create_user_command('Date', function()
-    local date = os.date('%F')
+    local date = string.format('[[%s]]', os.date('%F'))
     vim.api.nvim_put({ date }, 'c', true, true)
 end, {})
 
--- Writes Pomodoro Template from ~/.pomo.txt
+-- Writes today's date with vimwiki brackets extra spacing
+vim.api.nvim_create_user_command('Todo', function()
+    local date = string.format('[[%s]]', os.date('%F'))
+    vim.api.nvim_put({ '', date, '' }, 'c', true, true)
+end, {})
+
+-- Writes Pomodoro Template
 vim.api.nvim_create_user_command('Pomo', function()
-    local date = os.date('%F')
-    vim.api.nvim_put({ date }, 'c', true, true)
+    local date = string.format('[[%s]]', os.date('%F'))
+    vim.api.nvim_put({ '', date }, 'c', true, true)
     local pomo_template = 
         vim.fn.readfile(vim.fn.expand('~/.config/nvim/write/pomo.txt'))
     vim.api.nvim_put(pomo_template, 'l', true, true)
 end, {})
 
--- Writes Journal Template from ~/.journal_template.txt
+-- Writes Journal Template
 vim.api.nvim_create_user_command('Journal', function()
     local journal_template = 
         vim.fn.readfile(vim.fn.expand('~/.config/nvim/write/journal.txt'))
