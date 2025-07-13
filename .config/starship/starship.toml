@@ -1,26 +1,42 @@
 format = """
 $jobs\
+[\\[](#728079)\
+$username\
+$hostname\
 $directory\
 $git_branch\
+$git_state\
+$git_status\
+[\\]](#728079)\
 $character\
 """
 
-add_newline=false
+add_newline = false
 
 [jobs]
-format = '[\[$number\]](bold white) '
+format = '+ '
 symbol_threshold = 1
 number_threshold = 1
 
 [directory]
-truncation_length = 2
-truncation_symbol = '.../'
 format = '[$path](bold white)'
 
 [git_branch]
-format = ' on branch:[$branch(:$remote_branch)](bold white)'
+format = ' [ $branch(:$remote_branch)](#ffdd33)'
+
+[git_status]
+format = "[[(*$conflicted$modified$staged$renamed$deleted)](218)($ahead_behind$stashed)]($style)"
+style = "bold white"
+deleted = " X"
+stashed = " ≡"
+diverged = " ⇡⇣"
+ahead = " ⇡"
+behind = " ⇣"
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bold white"
 
 [character]
-success_symbol = '[>](bold white)'
-error_symbol = '[>](bold white)'
-
+success_symbol = '\$'
+error_symbol = '\$'
