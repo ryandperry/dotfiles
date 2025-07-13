@@ -1,0 +1,58 @@
+set ignorecase true
+
+cmd mkdir ${{
+    clear
+    printf "Directory Name: "
+    read ans
+    mkdir $ans
+}}
+
+cmd mkfile ${{
+    clear
+    printf "File Name: "
+    read ans
+    $EDITOR $ans
+}}
+
+cmd unarchive ${{
+    case "$f" in
+        *.zip) unzip "$f" ;;
+        *.tar.gz) tar -xzvf "$f" ;;
+        *.tar.bz2) tar -xjvf "$f" ;;
+        *.tar) tar -xvf "$f" ;;
+        *) echo "Unsupported format" ;;
+        esac
+}}
+
+cmd open ${{
+    case "$(file --mime-type -Lb "$f")" in
+        text/*) nvim "$f" ;;
+        *) wslview "$f" ;;
+    esac
+}}
+
+ map r
+ map d
+ map y
+ map g
+ map a
+ map u
+
+ map rm delete
+ map dd cut
+ map yy copy
+ map re rename
+ map . set hidden!
+ map A mkdir
+ map a mkfile
+ map uz unarchive
+ map o open
+ map <esc> quit
+ map R reload
+ map M moveto
+
+ map gH cd ~
+ map gD cd ~/../../mnt/c/Users/ryanp/Downloads
+ map gN cd ~/../../mnt/c/Users/ryanp/Documents/Notes
+ map gL cd ~/../../mnt/c/Users/ryanp/Documents/Library
+ map gS cd ~/../../mnt/c/Users/ryanp/Documents/Notes/Sync/f2025
