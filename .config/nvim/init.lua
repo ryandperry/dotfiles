@@ -16,6 +16,16 @@ vim.api.nvim_create_user_command('Date', function()
     vim.api.nvim_put({ date }, 'c', true, true)
 end, {})
 
+-- Append [[FIRSTWORD-YYYY-MM-DD]] at the end of a file
+vim.api.nvim_create_user_command('Lec', function()
+    local first_line = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1] or ""
+    local first_word = first_line:match("%w+") or "UNKNOWN"
+    local lec = string.format('[[%s-%s]]', first_word, os.date('%F'))
+    local line_count = vim.api.nvim_buf_line_count(0)
+    vim.api.nvim_buf_set_lines(0, line_count, line_count, false, { lec })
+    vim.api.nvim_win_set_cursor(0, { line_count + 1, 0})
+end, {})
+
 -- Writes today's date with vimwiki brackets extra spacing
 vim.api.nvim_create_user_command('Todo', function()
     local date = string.format('[[%s]]', os.date('%F'))
@@ -76,6 +86,9 @@ lspconfig.hls.setup{}
 -- Configuration for csharp-ls (C# LSP)
 -- lspconfig.csharp_ls.setup{}
 
+-- Configuration for rust-analyzer (Rust LSP)
+lspconfig.rust_analyzer.setup{}
+
 -- Configuration for nvim-telescope
 local builtin = require('telescope.builtin')
 
@@ -91,12 +104,11 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers,
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, 
                     { desc = 'Telescope help tags' })
 
--- Go to defenition in new pane
+-- Go to definition in new pane
 vim.keymap.set('n', 'gd', function()
-    vim.cmd('split')
-    vim.lsp.buf.definition()
-end, { desc = 'Go to Definition (split)' })
-
+  vim.cmd('split')
+  vim.lsp.buf.definition()
+end, { desc = 'Go to Definition (split)'})
 -- Move between panes
 vim.keymap.set('n', '<up>', '<C-w><up>')
 vim.keymap.set('n', '<down>', '<C-w><down>')
