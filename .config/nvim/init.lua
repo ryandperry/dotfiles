@@ -81,7 +81,7 @@ local builtin = require('telescope.builtin')
 
 -- ===== mappings =====
 
--- Mappings for nvim-telescope
+-- nvim-telescope
 vim.keymap.set('n', '<leader>ff', builtin.find_files, 
                     { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, 
@@ -90,6 +90,12 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers,
                     { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, 
                     { desc = 'Telescope help tags' })
+
+-- Go to defenition in new pane
+vim.keymap.set('n', 'gd', function()
+    vim.cmd('split')
+    vim.lsp.buf.definition()
+end, { desc = 'Go to Definition (split)' })
 
 -- Move between panes
 vim.keymap.set('n', '<up>', '<C-w><up>')
