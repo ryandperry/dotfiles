@@ -22,3 +22,5 @@ alias jup='cd ~/cosc325/notebooks && jupyter notebook --no-browser'
 alias hellochat='sudo systemctl restart ollama && ollama run deepseek-r1'
 # Close ollama process
 alias byechat='sudo systemctl stop ollama'
+# sl runs ls
+alias sl='ls'
